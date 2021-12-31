@@ -23,7 +23,7 @@ def evaluate(matrix, solution):
 				if distance < lowestDistance:
 					lowestDistance = distance
 
-			distances[x*size + y] = lowestDistance
+			distances[x*size + y] = lowestDistance*matrix[x][y]
 
 	mean = distances.mean()
 	bestPercentile = np.percentile(distances, 10, axis=0, interpolation="higher") #Takes the 95th best percentile
@@ -34,4 +34,4 @@ def evaluate(matrix, solution):
 	#The better the solution, the lower the score
 	score = (mean*1000 + median + bestPercentile + worst + worstPercentile)
 
-	return (score, [mean*100, median, bestPercentile, worst, worstPercentile])
+	return (score, [mean, median, bestPercentile, worst, worstPercentile])

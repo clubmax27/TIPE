@@ -7,20 +7,20 @@ import math
 import numpy as np
 import matplotlib.pyplot as plt
 
-MATRIX_SIZE = 100
+MATRIX_SIZE = 50
 
 
 def main():
-	Matrix = DensityMatrix.GenerateDensityMatrix(NUM_OF_HOTPOINT = 20, BINS = MATRIX_SIZE)
+	Matrix = DensityMatrix.GenerateDensityMatrix(NUM_OF_HOTPOINT = 10, BINS = MATRIX_SIZE)
 
 	solutions = []
 	for _ in range(10):
-		solutions.append(RandomSolution.GenerateRandomSolution(MATRIX_SIZE, 5))
+		solutions.append(RandomSolution.GenerateRandomSolution(MATRIX_SIZE, 8))
 
 	
 	#print(evaluate(Matrix, solutions[k]))
 
-	greedyResult = GreedyAlgorithm.Execute(Matrix, 6)
+	greedyResult = GreedyAlgorithm.Execute(Matrix, 6, NUM_OF_LOOPS = 5000)
 	greedySolution = greedyResult[0]
 	greedyScore = greedyResult[1]
 	print(evaluate(Matrix, greedySolution)[1])
@@ -40,7 +40,7 @@ def main():
 		x = x*10/MATRIX_SIZE - 5
 		y = y*10/MATRIX_SIZE - 5
 
-		plt.scatter(x - offset, y - offset, s=200/MATRIX_SIZE, c='red', marker='o')
+		plt.scatter(x - offset, y - offset, s=500/MATRIX_SIZE, c='red', marker='o')
 
 	plt.show()
 
