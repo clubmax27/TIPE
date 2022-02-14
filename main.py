@@ -8,6 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 MATRIX_SIZE = 50
+NUM_OF_HOSPITALS = 6
 
 
 def main():
@@ -15,12 +16,12 @@ def main():
 
 	solutions = []
 	for _ in range(10):
-		solutions.append(RandomSolution.GenerateRandomSolution(MATRIX_SIZE, 8))
+		solutions.append(RandomSolution.GenerateRandomSolution(MATRIX_SIZE, NUM_OF_HOSPITALS))
 
 	
 	#print(evaluate(Matrix, solutions[k]))
 
-	greedyResult = GreedyAlgorithm.Execute(Matrix, 6, NUM_OF_LOOPS = 5000)
+	greedyResult = GreedyAlgorithm.Execute(Matrix, NUM_OF_HOSPITALS, NUM_OF_LOOPS = 5000)
 	greedySolution = greedyResult[0]
 	greedyScore = greedyResult[1]
 	print(evaluate(Matrix, greedySolution)[1])

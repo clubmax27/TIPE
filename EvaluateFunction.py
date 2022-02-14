@@ -1,4 +1,5 @@
 import numpy as np
+import math
 
 def evaluate(matrix, solution): 
 	#Matrix is a (n,n) square matrix representing the population
@@ -23,7 +24,7 @@ def evaluate(matrix, solution):
 				if distance < lowestDistance:
 					lowestDistance = distance
 
-			distances[x*size + y] = lowestDistance*matrix[x][y]
+			distances[x*size + y] = math.sqrt(lowestDistance) * matrix[x][y] * 100 / (math.sqrt(2) * (size)) #Scale to percentages of max length
 
 	mean = distances.mean()
 	bestPercentile = np.percentile(distances, 10, axis=0, interpolation="higher") #Takes the 95th best percentile
