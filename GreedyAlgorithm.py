@@ -1,8 +1,6 @@
 from RandomSolution import RandomSolution
+from NeighboorSolution import GenerateNeighboorSolution
 from EvaluateFunction import evaluate
-
-import random
-import numpy as np
 
 class GreedyAlgorithm:
 
@@ -10,6 +8,7 @@ class GreedyAlgorithm:
 
 		shape = Matrix.shape
 		MatrixSize = shape[0]
+		scoreHistory = []
 
 		#We start off from a random solution
 		solution = RandomSolution.GenerateRandomSolution(MatrixSize, NUM_OF_POINTS)
@@ -17,32 +16,14 @@ class GreedyAlgorithm:
 
 		#For each cycle of the loop, we modify one coordinate of one point randomly, see if the result is positive, and act accordingly
 		for _ in range(NUM_OF_LOOPS):
-			randomPoint = random.randint(0, NUM_OF_POINTS - 1) #Choose a random point
 
-			randomAxis = random.randint(0, 1)
-			randomCoordinate = MatrixSize
-			while (randomCoordinate == MatrixSize): #Improbable situation, but better safe than sorry
-				randomCoordinate = int(random.random()*MatrixSize)
+			newSolution = GenerateNeighboorSolution(solution, MatrixSize)
 
+			newSolutionScore = evaluate(Matrix, newSolution)[0]
 
+			if newSolutionScore < solutionScore: #Our change made the score better
+				solution = newSolution
+				solutionScore = newSolutionScore
+			scoreHistory.append(solutionScore)
 
-			solutionCopy = np.empty((NUM_OF_POINTS,), dtype=object) #We operate on a copy of the solution
-
-			for k in range(NUM_OF_POINTS):
-				if k == randomPoint:
-					if randomAxis == 0: #if the axis is x
-						solutionCopy[k] = (randomCoordinate, solution[k][1])
-					else:
-						solutionCopy[k] = (solution[k][0], randomCoordinate)
-				else:
-					solutionCopy[k] = solution[k]
-
-		#	solutionCopy[randomPoint][randomAxis] = randomCoordinate
-
-			solutionCopyScore = evaluate(Matrix, solutionCopy)[0]
-
-			if solutionCopyScore < solutionScore: #Our change made the score better
-				solution = solutionCopy
-				solutionScore = solutionCopyScore
-
-		return (solution, solutionScore)
+		return (solution, solutionScore, scoreHistory)
