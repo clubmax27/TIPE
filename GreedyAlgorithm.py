@@ -17,7 +17,7 @@ class GreedyAlgorithm:
 		#For each cycle of the loop, we modify one coordinate of one point randomly, see if the result is positive, and act accordingly
 		for _ in range(NUM_OF_LOOPS):
 
-			newSolution = GenerateNeighboorSolution(solution, MatrixSize)
+			newSolution = GenerateNeighboorSolution(solution, MatrixSize, MatrixSize/2)
 
 			newSolutionScore = evaluate(Matrix, newSolution)[0]
 
