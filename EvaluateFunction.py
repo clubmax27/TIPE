@@ -33,6 +33,6 @@ def evaluate(matrix, solution):
 	worstPercentile = np.percentile(distances, 95, axis=0, interpolation="higher") #Takes the 5th worst percentile
 
 	#The better the solution, the lower the score
-	score = (mean*1000 + median + bestPercentile + worst + worstPercentile)
+	score = (mean + median + bestPercentile + worst + worstPercentile)
 
 	return (score, [mean, median, bestPercentile, worst, worstPercentile])
