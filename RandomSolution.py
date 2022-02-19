@@ -14,8 +14,8 @@ class RandomSolution:
 		y = MatrixSize
 
 		while (x == MatrixSize or y == MatrixSize): #Improbable situation, but better safe than sorry
-			x = int(np.random.rand()*MatrixSize)
-			y = int(np.random.rand()*MatrixSize)
+			x = int(np.random.rand()*MatrixSize) + 1
+			y = int(np.random.rand()*MatrixSize) + 1
 
 		return (x,y)
 

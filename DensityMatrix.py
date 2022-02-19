@@ -17,7 +17,7 @@ class DensityMatrix:
 		hottestPoints = [((np.random.rand()*10 - 5), (np.random.rand()*10 - 5)) for _ in range(NUM_OF_HOTPOINT)]
 		#hottestPoints = [(5,5), (-5, -5)]
 
-		with Bar('Generating Density Matrix', max=2*NUM_OF_HOTPOINT) as bar:
+		with Bar('Generating Density Matrix', max=2*NUM_OF_HOTPOINT, suffix='%(percent)d%%') as bar:
 			for i in range(NUM_OF_HOTPOINT):
 
 				x_hotpoint, y_hotpoint = hottestPoints[i]

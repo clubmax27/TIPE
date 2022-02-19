@@ -1,5 +1,5 @@
 from RandomSolution import RandomSolution
-from NeighboorSolution import GenerateNeighboorSolution
+from NeighborSolution import GenerateNeighborSolution
 from EvaluateFunction import evaluate
 
 from progress.bar import Bar
@@ -17,15 +17,14 @@ class GreedyAlgorithm:
 			solution = RandomSolution.GenerateRandomSolution(MatrixSize, NUM_OF_POINTS)
 		else:
 			solution = INITIAL_SOLUTION
-		print(INITIAL_SOLUTION[0])
 
 		solutionScore = evaluate(Matrix, solution)[0]
 
-		with Bar('Greedy Algorithm', max=NUM_OF_LOOPS) as bar:
+		with Bar('Greedy Algorithm', max=NUM_OF_LOOPS, suffix='%(percent)d%%') as bar:
 			#For each cycle of the loop, we modify one coordinate of one point randomly, see if the result is positive, and act accordingly
 			for _ in range(NUM_OF_LOOPS):
 
-				newSolution = GenerateNeighboorSolution(solution, MatrixSize, NEIGHBOR_RANGE = NEIGHBOR_RANGE)
+				newSolution = GenerateNeighborSolution(solution, MatrixSize, NEIGHBOR_RANGE = NEIGHBOR_RANGE)
 
 				newSolutionScore = evaluate(Matrix, newSolution)[0]
 

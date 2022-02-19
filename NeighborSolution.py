@@ -1,7 +1,7 @@
 import random
 import numpy as np
 
-def GenerateNeighboorSolution(solution, SIZE_OF_MATRIX, NEIGHBOR_RANGE = -1, pointId = -1): #Returns a NeighboorSolution
+def GenerateNeighborSolution(solution, SIZE_OF_MATRIX, NEIGHBOR_RANGE = -1, pointId = -1): #Returns a NeighborSolution
 	NUM_OF_POINTS = len(solution)
 
 	if pointId == -1:
