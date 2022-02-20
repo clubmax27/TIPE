@@ -3,15 +3,16 @@ from RandomSolution import RandomSolution
 from GreedyAlgorithm import GreedyAlgorithm
 from RecuitSimuleAlgorithm import RecuitSimuleAlgorithm
 from TabooSearchAlgorithm import TabooSearchAlgorithm
+from GeneticAlgorithm import GeneticAlgorithm
 from EvaluateFunction import evaluate
 
 import math
 import numpy as np
 import matplotlib.pyplot as plt
 
-MATRIX_SIZE = 200
-NUM_OF_HOSPITALS = 10
-LOOP = 500
+MATRIX_SIZE = 50
+NUM_OF_HOSPITALS = 6
+LOOP = 1000
 
 def main():
 
@@ -33,7 +34,10 @@ def main():
 
 	#Solve this Matrix with taboo search
 	#tabooSearchResult = TabooSearchAlgorithm.Execute(Matrix, NUM_OF_POINTS = NUM_OF_HOSPITALS, NUM_OF_LOOPS = 50, NEIGHBOR_RANGE = 5)
-	
+
+	#Solve this Matrix with the Genetic Algorithm
+	geneticResult = GeneticAlgorithm.Execute(Matrix, NUM_OF_POINTS = NUM_OF_HOSPITALS, NUM_OF_LOOPS = LOOP, POPULATION_SIZE = 20, MUTATION_RATE = 0.3)
+
 	extent = [-5, 5, -5, 5]
 	offset = (10/MATRIX_SIZE)*(math.sqrt(2)/3)
 	
@@ -43,6 +47,7 @@ def main():
 	plt.plot([k for k in range(len(annealingResult[2]))], annealingResult[2], label = "Méthode du Recuit Simulé", color="orangered")
 	plt.plot([k for k in range(len(tightNeighborhoodResult[2]))], tightNeighborhoodResult[2], label = "Méthode du Recuit Simulé + voisinage serré", color="aqua")
 	#plt.plot([k for k in range(len(tabooSearchResult[2]))], tabooSearchResult[2], label = "Méthode de la recherche taboo", color="chartreuse")
+	plt.plot([k for k in range(len(geneticResult[2]))], geneticResult[2], label = "Méthode génétique", color="royalblue")
 	plt.legend(loc="best")
 
 	plot2 = plt.figure(2)
