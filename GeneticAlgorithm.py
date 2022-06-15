@@ -16,14 +16,14 @@ class GeneticAlgorithm:
 		MatrixSize = shape[0]
 		scoreHistory = []
 
-		#Generate initial population smaller than population size
+		#On génère une population initiale
 		population = np.empty((POPULATION_SIZE,), dtype=object)
 		for k in range(int(POPULATION_SIZE/2)):
 			population[k] = RandomSolution.GenerateRandomSolution(MatrixSize, NUM_OF_POINTS)
 
 		with Bar('Genetic Algorithm', max=NUM_OF_LOOPS, suffix='%(percent)d%%') as bar:
 
-			#For each generation
+			#Pour chaque génération
 			for _ in range(NUM_OF_LOOPS):
 
 				sizeOfCurrentPopulation = 0
@@ -31,10 +31,10 @@ class GeneticAlgorithm:
 					if isinstance(population[k], Iterable):
 						sizeOfCurrentPopulation = k + 1
 
-				#We reproduce the current generation, and apply a mutation at a very low rate
+				#On reproduit la population actuelle
 				while sizeOfCurrentPopulation < POPULATION_SIZE:
 
-					#We take two parents randomly
+					#On choisit deux parents
 					parent1 = np.random.randint(0, sizeOfCurrentPopulation)
 					parent2 = np.random.randint(0, sizeOfCurrentPopulation)
 					while parent1 == parent2:
@@ -42,11 +42,11 @@ class GeneticAlgorithm:
 
 					separationIndex = np.random.randint(0, NUM_OF_POINTS - 1)
 
-					#We create two children
+					#On crée deux enfants
 					child1 = np.empty((NUM_OF_POINTS,), dtype=object)
 					child2 = np.empty((NUM_OF_POINTS,), dtype=object)
 
-					#We swap points
+					#On coupe des gènes des parents en deux, et on les injecte dans les enfants
 					for k in range(NUM_OF_POINTS):
 						if k <= separationIndex:
 							child1[k] = population[parent1][k]
@@ -55,7 +55,7 @@ class GeneticAlgorithm:
 							child1[k] = population[parent2][k]
 							child2[k] = population[parent1][k]
 
-					#If two population slot are ready
+					#On ajotue les enfants à la population
 					if sizeOfCurrentPopulation != POPULATION_SIZE - 1:
 						population[sizeOfCurrentPopulation] = child1
 						sizeOfCurrentPopulation += 1
@@ -65,17 +65,17 @@ class GeneticAlgorithm:
 
 				for solution in population:
 
-					#We mutate a select few solutions
+					#On mute queleques éléments de la population
 					if random.random() < MUTATION_RATE:
 						randomPoint = np.random.randint(0, NUM_OF_POINTS)
 						solution[randomPoint] = RandomSolution.GenerateRandomPoint(MatrixSize)
 
-				#Then, we filter the worst result
+				#On filtre les pires candidats
 				scores = []
 				for solution in population:
 					scores.append(evaluate(Matrix, solution)[0])
 
-				#We get rid of half of the population
+				#On supprime la moitié de la population
 				sortedScores = scores.copy()
 				sortedScores.sort()
 				thresholdScore = sortedScores[POPULATION_SIZE//2]
@@ -88,9 +88,18 @@ class GeneticAlgorithm:
 						newPopulation[sizeOfCurrentPopulation] = population[k]
 						sizeOfCurrentPopulation += 1
 
-				#We set the new population
+				#On définit la nouvelle population
 				np.copyto(population, newPopulation)
 
+				scoreHistory.append(thresholdScore)
+				scoreHistory.append(thresholdScore)
+				scoreHistory.append(thresholdScore)
+				scoreHistory.append(thresholdScore)
+				scoreHistory.append(thresholdScore)
+				scoreHistory.append(thresholdScore)
+				scoreHistory.append(thresholdScore)
+				scoreHistory.append(thresholdScore)
+				scoreHistory.append(thresholdScore)
 				scoreHistory.append(thresholdScore)
 
 				bar.next()

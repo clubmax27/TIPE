@@ -15,16 +15,18 @@ class RecuitSimuleAlgorithm:
 		MatrixSize = shape[0]
 		scoreHistory = []
 
-		#We start off from a random solution
+		#On commence a partir d'une solution aléatoire
 		solution = RandomSolution.GenerateRandomSolution(MatrixSize, NUM_OF_POINTS)
 		solutionScore = evaluate(Matrix, solution)[0]
 
 		bestSolution = solution
 		bestSolutionScore = solutionScore
 
-		currentTemp = INITIAL_TEMP #Initialize the temperture 
+		currentTemp = INITIAL_TEMP #On initialise la température 
 
-		#For each cycle of the loop, we modify one coordinate of one point randomly, see if the result is positive, and act accordingly
+		#Pour chaque itération, on modifie une coordonnée d'un point, on regarde si le résultat est positif
+		#Si oui, on accepte la solution
+		#Si non, on compare la différence de score avec le facteur de Boltzman
 
 		MAX = ((INITIAL_TEMP - ENDING_TEMP)/GRADIENT)
 		with Bar('Recuit Simulé Algorithm', max= MAX, suffix='%(percent)d%%') as bar:
@@ -40,12 +42,12 @@ class RecuitSimuleAlgorithm:
 					bestSolution = newSolution
 					bestSolutionScore = newSolutionScore
 
-				if scoreDifference > 0: #Our change made the score better OR the change is not too brutal
+				if scoreDifference > 0: #Si le score est meilleur ou si le changement n'est pas trop brutal
 					solution = newSolution
 					solutionScore = newSolutionScore
 				else:
 					temp = random.random()
-					if temp < np.exp((scoreDifference / currentTemp) / alpha):
+					if temp < np.exp((scoreDifference / currentTemp)/alpha):
 						solution = newSolution
 						solutionScore = newSolutionScore
 

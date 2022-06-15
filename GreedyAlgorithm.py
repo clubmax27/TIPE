@@ -12,7 +12,7 @@ class GreedyAlgorithm:
 		MatrixSize = shape[0]
 		scoreHistory = []
 
-		#We start off from a random solution
+		#On commence a partir d'une solution aléatoire
 		if INITIAL_SOLUTION[0] == (-1, -1):
 			solution = RandomSolution.GenerateRandomSolution(MatrixSize, NUM_OF_POINTS)
 		else:
@@ -21,7 +21,7 @@ class GreedyAlgorithm:
 		solutionScore = evaluate(Matrix, solution)[0]
 
 		with Bar('Greedy Algorithm', max=NUM_OF_LOOPS, suffix='%(percent)d%%') as bar:
-			#For each cycle of the loop, we modify one coordinate of one point randomly, see if the result is positive, and act accordingly
+			#Pour chaque itération, on modifie une coordonnée d'un point, on regarde si le résultat est positif, et si oui, on accepte la solution
 			for _ in range(NUM_OF_LOOPS):
 
 				newSolution = GenerateNeighborSolution(solution, MatrixSize, NEIGHBOR_RANGE = NEIGHBOR_RANGE)
