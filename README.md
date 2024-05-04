@@ -21,11 +21,12 @@ pip install -r requirements.txt
 - **Dark Violet**: Simulated Annealing Algorithm
 - **Light Blue**: Greedy Algorithm with Tight Neighborhood
 - **Royal Blue**: Genetic Algorithm
+- **Deep Pink**: Taboo Algorithm
 
 ## Usage
 
-1. Run the main script `main.py` to execute the algorithms and generate comparative graphs.
-2. Adjust parameters such as matrix size, number of hospitals, and algorithm loops as needed.
+1. Adjust parameters such as matrix size, number of hospitals, and algorithm loops as needed in the config file.
+2. Run the main script `main.py` to execute the algorithms and generate comparative graphs.
 
 ## Algorithms Used
 
