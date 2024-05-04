@@ -54,6 +54,4 @@ def evaluate(matrix, solution):
 
 	score = mean + bestPercentile + median + worst + worstPercentile + saturation
 
-	#print((score, [mean, bestPercentile, median, worst, worstPercentile, saturation]))
-
 	return (score, [mean, bestPercentile, median, worst, worstPercentile, saturation])

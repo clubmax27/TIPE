@@ -56,20 +56,6 @@ def GenerateSartheDensityMatrix(BINS = 50):
 
 		Matrix, xedges, yedges = np.histogram2d(x_points, y_points, bins=BINS, weights=weights_points)
 
-		"""
-		extent = [-5, 5, -5, 5]
-		plt.imshow(Matrix.T, cmap='autumn_r', extent=extent, origin='lower', norm=LogNorm())
-
-		
-		addPoint(-3.59, -2.77)
-		addPoint(1.79, 2.38)
-		addPoint(-0.29, -0.33)
-		addPoint(1.70, -1.23)
-		addPoint(-1.58, 1.73)
-
-		plt.show()
-		"""
-
 		return Matrix.T
 
 def addPoint(x,y):
@@ -97,16 +83,7 @@ def GeneratePolygonFromRegionCoordinates(coordinates):
 	coordinatesFormated = []
 
 	for coordinate in coordinates:
-		"""
-		global MAX_X, MAX_Y, MIN_X, MIN_Y
-		MAX_X = (MAX_X if coordinate[0] < MAX_X else coordinate[0])
-		MAX_Y = (MAX_Y if coordinate[1] < MAX_Y else coordinate[1])
-		MIN_X = (MIN_X if coordinate[0] > MIN_X else coordinate[0])
-		MIN_Y = (MIN_Y if coordinate[1] > MIN_Y else coordinate[1])
-		"""
 		coordinatesFormated.append(scaleCoordinates((coordinate[0], coordinate[1])))
-
-	#print(coordinatesFormated)
 
 	return Polygon(coordinatesFormated)
 
